@@ -1,0 +1,24 @@
+﻿@model Bai5.Models.AdminUser
+@{
+    ViewBag.Title = "RegisterUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .field-validation-error {
+        color: red;
+    }
+</style>
+<h2>Register User</h2>
+@using (Html.BeginForm("RegisterUser", "LoginUser", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <p>@Html.LabelFor(model =>model.ID)</p>
+    <p>@Html.EditorFor(model =>model.ID)</p>
+    <p>
+        @Html.ValidationMessageFor(model =>model.ID)
+    </p>
+    if (ViewBag.ErrorRegister!=null)
+    {
+<p>@ViewBag.ErrorRegister</p>
+    }
+}
