@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Bai5.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Bai5.Controllers
 {
@@ -13,9 +15,21 @@ namespace Bai5.Controllers
         Database1Entities database = new Database1Entities();
 
         // GET: Product
-        public ActionResult Index()
+        public ActionResult Index(string category,int? page,double min = double.MinValue,double max = double.MaxValue)
         {
-            return View(database.Products.ToList());
+            int pageSize = 4;
+            int pageNum = (page ?? 1);
+            if (category ==null)
+            {
+                var productList = database.Products.OrderByDescending(x => x.NamePro);
+                    return View(productList.ToPagedList(pageNum,pageSize));
+            }
+            else
+            {
+                var productList = database.Products.OrderByDescending(x => x.NamePro)
+                    .Where(p => p.Category == category);
+                return View(productList);
+            }
         }
         public ActionResult Create()
         {
@@ -27,6 +41,7 @@ namespace Bai5.Controllers
         [HttpPost]
         public ActionResult Create(Product pro)
         {
+            List<Category> list = database.Categories.ToList();
             try
             {
                 if (pro.UploadImage!= null)
@@ -37,6 +52,7 @@ namespace Bai5.Controllers
                     pro.ImagePro = "~/Content/images/" + filename;
                     pro.UploadImage.SaveAs(Path.Combine(Server.MapPath("~/Content/images/"), filename));
                 }
+                ViewBag.listCategory = new SelectList(list, "IDCate", "NameCate", 1);
                 database.Products.Add(pro);
                 database.SaveChanges();
                 return RedirectToAction("Index");
@@ -53,6 +69,11 @@ namespace Bai5.Controllers
             Category se_cate = new Category();
             se_cate.ListCate = database.Categories.ToList<Category>();
             return PartialView(se_cate);
+        }
+        public ActionResult SearchOption(double min = double.MinValue, double max = double .MaxValue)
+        {
+            var list = database.Products.Where(p => (double)p.Price >= min && (double)p.Price <= max).ToList();
+            return View(list);
         }
     }
 }

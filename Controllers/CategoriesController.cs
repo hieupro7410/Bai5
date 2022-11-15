@@ -75,6 +75,10 @@ namespace Bai5.Controllers
                 return Content("This data is using in other table, Error Delete!");
             }
         }
-       
+       //public PartialViewResult CategoryPartial()
+       // {
+       //     List<Category> cateList = database.Categories.ToList();
+       //     return PartialView(cateList);
+       // }
     }
 }

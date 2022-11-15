@@ -27,25 +27,56 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        
-                        <img src="~/Content/images/cart2.jpg"" style="height:30px;width:30px;margin-top:10px;" />
-                        @Html.Action("BagCart", "ShoppingCart")
+                        <a href="/ShoppingCart/ShowCart">
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                            @Html.Action("BagCart", "ShoppingCart")
+                        </a>
                     </li>
                     <li><a href="/LoginUser/RegisterUser"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
                     <li><a href="/LoginUser/Index"><span class="glyphicon glyphicon-log-in">Login</span></a></li>
                     <li><a href="@Url.Action("LogOutUser","LoginUser")">Log Out</a></li>
+                    <li class="format-hello">
+                        @if (Session["NameUser"] == null)
+                        {
+                            <span>Hello</span>
+                        }
+                        else
+                        {
+                            <span><text>Hello</text>@Session["NameUser"]</span>
+                        }
+                    </li>
+
+
 
                 </ul>
+                <div class="container-fluid body-content">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <ul style="text-decoration:none;background-color:greenyellow;margin-top:20px;list-style-type:none;padding:10px;">
+                                <li><a href="/OrderDetail/GroupByTop5" style="color:white;" id="animation-top5">Top 5 sản phẩm bán chạy nhất</a></li>
+                            </ul>
+                            <ul style="list-style-type:none">
+                                <li>
+                                    <a href="/Product/SearchOption" class="btn btn-default">Search theo giá</a>
+                                </li>
+                            </ul>
+                            @*{ Html.RenderAction("CategoryPartial", "Categories");}*@
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-10" id="div-content">
+                    @RenderBody()
+
+                </div>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

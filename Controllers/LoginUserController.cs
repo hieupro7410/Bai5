@@ -27,7 +27,7 @@ namespace Bai5.Controllers
             else
             {
                 database.Configuration.ValidateOnSaveEnabled = false;
-                Session["ID"] = _user.ID;
+                Session["NameUser"] = _user.NameUser;
                 Session["PasswordUser"] = _user.PasswordUser;
                 return RedirectToAction("Index", "Product");
 

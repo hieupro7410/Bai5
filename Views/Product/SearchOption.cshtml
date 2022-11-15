@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Bai5.Models.Product>
+
+@{
+    ViewBag.Title = "SearchOption";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("SearchOption", "Product"))
+{
+    <text>Từ</text> <input type="number" name="min"  />
+    <text>Dến</text> <input type="number" name="max" />
+                     <input type="submit"  value="Search" />
+                     <div class="row">
+                         @foreach (var pro in Model)
+                         {
+                             <div class="col-sm-12 col-sm-6 col-md-4 col-lg-3">
+                                 <div class="card-pro">
+                                     <p>@Html.DisplayFor(model => pro.ProductID)</p>
+                                     <img src="@Url.Content(pro.ImagePro)" height="150" width="150" />
+                                     <p>@Html.DisplayFor(model => pro.NamePro)</p>
+                                     <p>@Html.DisplayFor(model => pro.Price)</p>
+                                     <a href="/ShoppingCart/AddToCart/@pro.ProductID" class="btn btn-default">buy</a>
+                                 </div>
+                             </div>
+                         }
+                     </div>
+
+}

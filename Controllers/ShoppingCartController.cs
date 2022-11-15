@@ -61,6 +61,41 @@ namespace Bai5.Controllers
             ViewBag.QuantityCart = total_quantity_item;
             return PartialView("BagCart");
         }
+        public ActionResult CheckOut(FormCollection form)
+        {
+            try
+            {
+                Cart cart = Session["Cart"] as Cart;
+                OrderPro _order = new OrderPro();
+                _order.DateOrder = DateTime.Now;
+                _order.AddressDeliverry = form["AddressDelivery"];
+                _order.IDCus = int.Parse(form["CodeCustomer"]);
+                database.OrderProes.Add(_order);
+                foreach (var item in cart.Items)
+                {
+                    OrderDetail _order_detail = new OrderDetail();
+                    _order_detail.IDOrder = _order.ID;
+                    _order_detail.IDProduct = item._product.ProductID;
+                    _order_detail.UnitPrice = (double)item._product.Price;
+                    _order_detail.Quantity = item._quantity;
+                    database.OrderDetails.Add(_order_detail);
+                    foreach (var p in database.Products.Where(s=> s.ProductID==_order_detail.IDProduct))
+
+                    {
+                        var update_quan_pro = p.Quantity - item._quantity;
+                        p.Quantity = update_quan_pro;
+                    }
+                }
+                database.SaveChanges();
+                cart.ClearCart();
+                return RedirectToAction("CheckOut_Success", "ShoppingCart");
+            }
+            catch 
+            {
+
+                return Content("Error checkout.Please check information of Customer...Thanks.");
+            }
+        }
 
     }
 }

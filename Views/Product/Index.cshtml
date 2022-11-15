@@ -1,5 +1,7 @@
-﻿@model IEnumerable<Bai5.Models.Product>
-
+﻿@*model IEnumerable<Bai5.Models.Product>*@
+@using Bai5.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<Product>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -23,4 +25,8 @@
             </div>
         }
     </div>
+</div>
+Trang @(Model.PageCount<Model.PageNumber ? 0 :Model.PageNumber) / @Model.PageCount
+<div class="MenuPage">
+    @Html.PagedListPager(Model,page=> Url.Action("Index", new {page=page}))
 </div>

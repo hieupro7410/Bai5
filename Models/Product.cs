@@ -30,6 +30,7 @@ namespace Bai5.Models
         public string Category { get; set; }
         public Nullable<decimal> Price { get; set; }
         public string ImagePro { get; set; }
+        public Nullable<int> Quantity { get; set; }
     
         public virtual Category Category1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
