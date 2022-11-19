@@ -12,7 +12,7 @@ namespace Bai5.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class Category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,7 +20,7 @@ namespace Bai5.Models
         {
             this.Products = new HashSet<Product>();
         }
-
+    
         public int Id { get; set; }
         public string IDCate { get; set; }
         public string NameCate { get; set; }

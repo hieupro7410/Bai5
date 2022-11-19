@@ -1,18 +1,16 @@
 ﻿@using Bai5.Models
 @model List<Category>
-
-@{
-    ViewBag.Title = "CategoryPartial";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<h2>CategoryPartial</h2>
 <style>
     #div-u {
-        padding-top: 30px;
-        margin-top: 50px;
-        background-color: aquamarine;
+        /*padding-top: 30px;
+        margin-top: 50px;*/
+        padding: 20px;
+        margin: 0;
+        width: 100%;
+        display: inline-block;
+        background-color: wheat;
         text-decoration: none;
+        border: solid 2px;
     }
 
     .div-cate {
@@ -30,13 +28,15 @@
             text-decoration: none;
         }
 </style>
-<ul style="list-style-type:none" id="div-u">
-    @{ foreach (var item in Model)
+
+<ul style="list-style-type:none;" id="div-u">
+    @{
+        foreach (var item in Model)
         {
             <li class="div-cate">
-                @Html.ActionLink(item.NameCate, "Index", "Product", new { category = item.IDCate.Trim() }, "")
+                @Html.ActionLink(item.NameCate, "Index", "Product"@*new { category = item.IDCate.Trim() }*@)
             </li>
-
         }
     }
 </ul>
+

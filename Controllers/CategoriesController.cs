@@ -9,8 +9,14 @@ namespace Bai5.Controllers
 {
     public class CategoriesController : Controller
     {
+
         // GET: Categories
         Database1Entities database = new Database1Entities();
+        public PartialViewResult CategoryPartial()
+        {
+            var cateList = database.Categories.ToList();
+            return PartialView(cateList);
+        }
         public ActionResult Index(string _name)
         {
             if (_name == null)
@@ -75,10 +81,6 @@ namespace Bai5.Controllers
                 return Content("This data is using in other table, Error Delete!");
             }
         }
-       //public PartialViewResult CategoryPartial()
-       // {
-       //     List<Category> cateList = database.Categories.ToList();
-       //     return PartialView(cateList);
-       // }
+        
     }
 }

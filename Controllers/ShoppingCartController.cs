@@ -60,7 +60,7 @@ namespace Bai5.Controllers
                 total_quantity_item = cart.Total_quantity();
             ViewBag.QuantityCart = total_quantity_item;
             return PartialView("BagCart");
-        }
+        }   
         public ActionResult CheckOut(FormCollection form)
         {
             try
@@ -95,6 +95,10 @@ namespace Bai5.Controllers
 
                 return Content("Error checkout.Please check information of Customer...Thanks.");
             }
+        }
+        public ActionResult CheckOut_Success()
+        {
+            return View();
         }
 
     }

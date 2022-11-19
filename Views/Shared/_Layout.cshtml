@@ -5,79 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
-<script src="~/Scripts/script.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li><a href="/Home/Index" style="font-size:initial;">Trang Chủ</a></li>
                 </ul>
+
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="/ShoppingCart/ShowCart">
-                            <span class="glyphicon glyphicon-shopping-cart"></span>
-                            @Html.Action("BagCart", "ShoppingCart")
-                        </a>
+                        <span>
+                            <a href="/ShoppingCart/ShowCart">
+                                <img src="@Url.Content("~/Content/images/cart2.png")" style="height:30px;width:30px;margin-top:10px;" />
+                            </a>
+                        </span>
+                        @Html.Action("BagCart", "ShoppingCart")
                     </li>
-                    <li><a href="/LoginUser/RegisterUser"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-                    <li><a href="/LoginUser/Index"><span class="glyphicon glyphicon-log-in">Login</span></a></li>
-                    <li><a href="@Url.Action("LogOutUser","LoginUser")">Log Out</a></li>
-                    <li class="format-hello">
+                    <li><a href="/LoginUser/RegisterUser" style="font-size:initial;"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
+                    <li><a href="/LoginUser/Index" style="font-size:initial;"><span class="glyphicon glyphicon-log-in"></span>LogIn</a></li>
+                    <li><a href="@Url.Action("LogoutUser","LoginUser")" style="height:56px;font-size:initial;">Logout</a></li>
+                    <li style="padding-top:15px; color:white;">
                         @if (Session["NameUser"] == null)
                         {
                             <span>Hello</span>
                         }
                         else
                         {
-                            <span><text>Hello</text>@Session["NameUser"]</span>
+                            <span> <text> Hello </text> @Session["NameUser"] </span>
                         }
+
                     </li>
-
-
-
                 </ul>
-                <div class="container-fluid body-content">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <ul style="text-decoration:none;background-color:greenyellow;margin-top:20px;list-style-type:none;padding:10px;">
-                                <li><a href="/OrderDetail/GroupByTop5" style="color:white;" id="animation-top5">Top 5 sản phẩm bán chạy nhất</a></li>
-                            </ul>
-                            <ul style="list-style-type:none">
-                                <li>
-                                    <a href="/Product/SearchOption" class="btn btn-default">Search theo giá</a>
-                                </li>
-                            </ul>
-                            @*{ Html.RenderAction("CategoryPartial", "Categories");}*@
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-md-10" id="div-content">
-                    @RenderBody()
-
-                </div>
             </div>
         </div>
     </div>
-    <hr />
-    <footer>
-        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-    </footer>
-
-
+    <div class="container-fluid body-content">
+        <div class="row">
+            <div class="col-md-2">
+                <ul style="text-decoration:none;background-color:orangered;border:double ;margin-top:20px;list-style-type:none;padding:10px;">
+                    <li><a href="/OrderDetail/GroupByTop5" style="color:white;" id="animation-top5">Top 5 sản phẩm bán chạy</a></li>
+                </ul>
+                <ul style="list-style-type:none;">
+                    <li>
+                        <a href="/Product/SearchOption" class="btn btn-default">Search theo giá</a>
+                    </li>
+                </ul>
+                @{ Html.RenderAction("CategoryPartial", "Categories");}
+            </div>
+            <div class="col-md-10" id="div-content">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <div id="div-footer" style="background-color:black;">
+        <p>&copy; @DateTime.Now.Year - Design By Quang Editor</p>
+    </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

@@ -48,10 +48,9 @@ namespace Bai5.Models
             var item = items.Find(s => s._product.ProductID == id);
             if (item != null)
             {
-                if (items.Find(s=> s._product.Quantity > _new_quan)!=null)
-                item._quantity -= _new_quan;
-                else
-                    item._quantity += _new_quan;
+                if (items.Find(s => s._product.ProductID > _new_quan) != null)
+                    item._quantity = _new_quan;
+                else item._quantity = 1;
             }
         }
         public void Remove_CartItem(int id)

@@ -22,10 +22,5 @@ namespace Bai5.Models
         public int? Top5_Quantity { get; set; }
         public int? Sum_Quantity { get; set; }
 
-
-
-
-
-
     }
 }
