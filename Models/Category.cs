@@ -11,7 +11,6 @@ namespace Bai5.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
     
     public partial class Category
     {
